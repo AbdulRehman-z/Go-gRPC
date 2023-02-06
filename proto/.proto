@@ -1,0 +1,33 @@
+syntax = "proto3";
+option  go_package = "./proto";
+package welcomeService;
+
+service WelcomeService {
+  rpc Welcome(WelcomeRequest) returns (WelcomeResponse) {}
+  rpc ClientStream(stream Cities) returns (ListOfCities) {}
+  rpc ServerStream(Cities) returns (stream ListOfCities) {}
+  rpc BidirectionalStream(stream Cities) returns (stream ListOfCities) {}
+}
+
+message WelcomeRequest {
+  string name = 1;
+}
+
+message  WelcomeResponse {
+  string message = 1;
+}
+
+message Cities {
+  string city = 1;
+}
+
+message  ListOfCities {
+  repeated string city = 1;
+}
+
+
+
+
+
+
+
