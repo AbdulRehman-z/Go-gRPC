@@ -4,6 +4,7 @@ import (
 	"fmt"
 	"google.golang.org/grpc"
 	"google.golang.org/grpc/credentials/insecure"
+	pb "grpc/proto"
 )
 
 
@@ -14,16 +15,27 @@ const (
 
 func main() {
 
-	connection,err := grpc.Dial(port, grpc.WithTransportCredentials(insecure.NewCredentials()))
+	connection,err := grpc.Dial("localhost"+port, grpc.WithTransportCredentials(insecure.NewCredentials()))
 	checkFatalError(err)
 
-	defer func(connection *grpc.ClientConn) {
-		err := connection.Close()
-		if err != nil {
-			fmt.Printf("Error: %s", err)
-		}
-	}(connection)
-	
+	//defer func(connection *grpc.ClientConn) {
+	//	err := connection.Close()
+	//	if err != nil {
+	//		fmt.Printf("Error: %s", err)
+	//	}
+	//}(connection)
+
+
+
+defer func(connection *grpc.ClientConn) {
+	err := connection.Close()
+	if err != nil {
+		fmt.Printf("Errormlmwdklaskl: %s", err)
+	}
+}(connection)
+
+   client := pb.NewWelcomeServiceClient(connection)
+    CallWelcome(client)
 
 }
 

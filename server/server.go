@@ -22,8 +22,11 @@ func main() {
 	grpcServer := grpc.NewServer()
 	// Register the service
 	pb.RegisterWelcomeServiceServer(grpcServer, &welcome{})
+	fmt.Printf("Server is running on port %s", port)
 	err = grpcServer.Serve(listen)
 	checkFatalError(err)
+
+
 }
 
 func checkFatalError(err error)  {
