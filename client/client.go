@@ -35,7 +35,15 @@ defer func(connection *grpc.ClientConn) {
 }(connection)
 
    client := pb.NewWelcomeServiceClient(connection)
-    CallWelcome(client)
+   namesOfCities := &pb.CitiesArray{
+	   Cities: []string{"Karachi","lahere"},
+   }
+
+   // unary Api
+   // CallWelcome(client)
+
+   // serverSideStreaming Api
+   serverSideStreaming(client, namesOfCities)
 
 }
 

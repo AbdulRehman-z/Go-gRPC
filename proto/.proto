@@ -4,9 +4,9 @@ package welcomeService;
 
 service WelcomeService {
   rpc Welcome(WelcomeRequest) returns (WelcomeResponse) {}
-  rpc ClientStream(stream Cities) returns (ListOfCities) {}
-  rpc ServerStream(Cities) returns (stream ListOfCities) {}
-  rpc BidirectionalStream(stream Cities) returns (stream ListOfCities) {}
+  rpc ClientStream(stream CitiesArray) returns (CollectionOfCities) {}
+  rpc ServerStream(CitiesArray) returns (stream WelcomeResponse) {}
+  rpc BidirectionalStream(stream CitiesArray) returns (stream CollectionOfCities) {}
 }
 
 message WelcomeRequest {
@@ -17,11 +17,11 @@ message  WelcomeResponse {
   string message = 1;
 }
 
-message Cities {
-  string city = 1;
+message CitiesArray {
+ repeated string cities = 1;
 }
 
-message  ListOfCities {
+message  CollectionOfCities {
   repeated string city = 1;
 }
 
