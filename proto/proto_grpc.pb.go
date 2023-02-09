@@ -55,8 +55,8 @@ func (c *welcomeServiceClient) ClientStream(ctx context.Context, opts ...grpc.Ca
 }
 
 type WelcomeService_ClientStreamClient interface {
-	Send(*CitiesArray) error
-	CloseAndRecv() (*CollectionOfCities, error)
+	Send(*WelcomeRequest) error
+	CloseAndRecv() (*CitiesArray, error)
 	grpc.ClientStream
 }
 
@@ -64,15 +64,15 @@ type welcomeServiceClientStreamClient struct {
 	grpc.ClientStream
 }
 
-func (x *welcomeServiceClientStreamClient) Send(m *CitiesArray) error {
+func (x *welcomeServiceClientStreamClient) Send(m *WelcomeRequest) error {
 	return x.ClientStream.SendMsg(m)
 }
 
-func (x *welcomeServiceClientStreamClient) CloseAndRecv() (*CollectionOfCities, error) {
+func (x *welcomeServiceClientStreamClient) CloseAndRecv() (*CitiesArray, error) {
 	if err := x.ClientStream.CloseSend(); err != nil {
 		return nil, err
 	}
-	m := new(CollectionOfCities)
+	m := new(CitiesArray)
 	if err := x.ClientStream.RecvMsg(m); err != nil {
 		return nil, err
 	}
@@ -205,8 +205,8 @@ func _WelcomeService_ClientStream_Handler(srv interface{}, stream grpc.ServerStr
 }
 
 type WelcomeService_ClientStreamServer interface {
-	SendAndClose(*CollectionOfCities) error
-	Recv() (*CitiesArray, error)
+	SendAndClose(*CitiesArray) error
+	Recv() (*WelcomeRequest, error)
 	grpc.ServerStream
 }
 
@@ -214,12 +214,12 @@ type welcomeServiceClientStreamServer struct {
 	grpc.ServerStream
 }
 
-func (x *welcomeServiceClientStreamServer) SendAndClose(m *CollectionOfCities) error {
+func (x *welcomeServiceClientStreamServer) SendAndClose(m *CitiesArray) error {
 	return x.ServerStream.SendMsg(m)
 }
 
-func (x *welcomeServiceClientStreamServer) Recv() (*CitiesArray, error) {
-	m := new(CitiesArray)
+func (x *welcomeServiceClientStreamServer) Recv() (*WelcomeRequest, error) {
+	m := new(WelcomeRequest)
 	if err := x.ServerStream.RecvMsg(m); err != nil {
 		return nil, err
 	}

@@ -4,7 +4,7 @@ package welcomeService;
 
 service WelcomeService {
   rpc Welcome(WelcomeRequest) returns (WelcomeResponse) {}
-  rpc ClientStream(stream CitiesArray) returns (CollectionOfCities) {}
+  rpc ClientStream(stream WelcomeRequest) returns (CitiesArray) {}
   rpc ServerStream(CitiesArray) returns (stream WelcomeResponse) {}
   rpc BidirectionalStream(stream CitiesArray) returns (stream CollectionOfCities) {}
 }
