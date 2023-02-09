@@ -36,7 +36,7 @@ defer func(connection *grpc.ClientConn) {
 
    client := pb.NewWelcomeServiceClient(connection)
    namesOfCities := &pb.CitiesArray{
-	   Cities: []string{"Karachi","lahere"},
+	   Cities: []string{"Karachi","lahore"},
    }
 
    // unary Api
