@@ -6,7 +6,7 @@ service WelcomeService {
   rpc Welcome(WelcomeRequest) returns (WelcomeResponse) {}
   rpc ClientStream(stream WelcomeRequest) returns (CitiesArray) {}
   rpc ServerStream(CitiesArray) returns (stream WelcomeResponse) {}
-  rpc BidirectionalStream(stream CitiesArray) returns (stream CollectionOfCities) {}
+  rpc BidirectionalStream(stream WelcomeRequest) returns (stream WelcomeResponse) {}
 }
 
 message WelcomeRequest {

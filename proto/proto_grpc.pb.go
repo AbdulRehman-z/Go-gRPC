@@ -121,8 +121,8 @@ func (c *welcomeServiceClient) BidirectionalStream(ctx context.Context, opts ...
 }
 
 type WelcomeService_BidirectionalStreamClient interface {
-	Send(*CitiesArray) error
-	Recv() (*CollectionOfCities, error)
+	Send(*WelcomeRequest) error
+	Recv() (*WelcomeResponse, error)
 	grpc.ClientStream
 }
 
@@ -130,12 +130,12 @@ type welcomeServiceBidirectionalStreamClient struct {
 	grpc.ClientStream
 }
 
-func (x *welcomeServiceBidirectionalStreamClient) Send(m *CitiesArray) error {
+func (x *welcomeServiceBidirectionalStreamClient) Send(m *WelcomeRequest) error {
 	return x.ClientStream.SendMsg(m)
 }
 
-func (x *welcomeServiceBidirectionalStreamClient) Recv() (*CollectionOfCities, error) {
-	m := new(CollectionOfCities)
+func (x *welcomeServiceBidirectionalStreamClient) Recv() (*WelcomeResponse, error) {
+	m := new(WelcomeResponse)
 	if err := x.ClientStream.RecvMsg(m); err != nil {
 		return nil, err
 	}
@@ -252,8 +252,8 @@ func _WelcomeService_BidirectionalStream_Handler(srv interface{}, stream grpc.Se
 }
 
 type WelcomeService_BidirectionalStreamServer interface {
-	Send(*CollectionOfCities) error
-	Recv() (*CitiesArray, error)
+	Send(*WelcomeResponse) error
+	Recv() (*WelcomeRequest, error)
 	grpc.ServerStream
 }
 
@@ -261,12 +261,12 @@ type welcomeServiceBidirectionalStreamServer struct {
 	grpc.ServerStream
 }
 
-func (x *welcomeServiceBidirectionalStreamServer) Send(m *CollectionOfCities) error {
+func (x *welcomeServiceBidirectionalStreamServer) Send(m *WelcomeResponse) error {
 	return x.ServerStream.SendMsg(m)
 }
 
-func (x *welcomeServiceBidirectionalStreamServer) Recv() (*CitiesArray, error) {
-	m := new(CitiesArray)
+func (x *welcomeServiceBidirectionalStreamServer) Recv() (*WelcomeRequest, error) {
+	m := new(WelcomeRequest)
 	if err := x.ServerStream.RecvMsg(m); err != nil {
 		return nil, err
 	}
