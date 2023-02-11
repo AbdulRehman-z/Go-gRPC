@@ -6,19 +6,21 @@ import (
 	"log"
 )
 
-func  (s *welcome) BidirectionalStreamServer(stream pb.WelcomeService_BidirectionalStreamServer) error  {
+func  (s *welcome) BidirectionalStream(stream pb.WelcomeService_BidirectionalStreamServer) error  {
 	for {
-		request,err := stream.Recv()
+		req, err := stream.Recv()
 		if err == io.EOF {
-			log.Println("Stream ended")
+			return nil
 		}
-		log.Println("Stream received from client: ", request.Name)
-
-		response := &pb.WelcomeResponse{Message: "Capital" + request.Name}
-
-		if err := stream.Send(response); err != nil {
-			panic(err)
+		if err != nil {
+			return err
 		}
-		log.Println("Stream sent to client: ", request.Name)
+		log.Printf("Got request with name : %v", req.Name)
+		res := &pb.WelcomeResponse{
+			Message: "Hello " + req.Name,
+		}
+		if err := stream.Send(res); err != nil {
+			return err
+		}
 	}
 }

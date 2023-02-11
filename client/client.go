@@ -46,7 +46,10 @@ defer func(connection *grpc.ClientConn) {
    //serverSideStreaming(client, namesOfCities)
 
    // clientSideStreaming
-   clientSideStreaming(client,namesOfCities)
+   //clientSideStreaming(client,namesOfCities)
+
+   // bidirectionalStreaming
+   bidirectionalClientStreaming(client,namesOfCities)
 }
 
 func checkFatalError(err error){
